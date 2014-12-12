@@ -5,9 +5,6 @@
   <module name="SuppressionFilter">
     <property name="file" value="${checkstyleConfigDir}/suppressions.xml"/>
   </module>
-  <module name="RegexpHeader">
-    <property name="headerFile" value="${checkstyleConfigDir}/required-header.txt"/>
-  </module>
   <module name="RegexpSingleline">
     <property name="format" value="File \| Settings \| File Templates"/>
   </module>

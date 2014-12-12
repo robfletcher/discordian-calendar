@@ -37,11 +37,12 @@ public final class DiscordianDate implements ChronoLocalDate, Serializable {
   private final LocalDate isoDate;
 
   /**
-   * Obtains an instance of {@code DiscordianDate} from the year-of-era,
+   * Obtains an instance of `DiscordianDate` from the year-of-era,
    * season-of-year and day-of-season.
-   * <p/>
-   * Note it is not possible to construct an instance representing the leap-day using this method as
-   * the leap day falls "outside" of the Discordian season. Instead use {@link #ofLeapDay(int)}.
+   *
+   * Note it is not possible to construct an instance representing the leap-day
+   * using this method as the leap day falls "outside" of the Discordian season.
+   * Instead use {@link #ofLeapDay(int)}.
    *
    * @param year        the year-of-era to represent.
    * @param season      the season-of-year to represent, from 1 to 5.
@@ -59,10 +60,12 @@ public final class DiscordianDate implements ChronoLocalDate, Serializable {
   }
 
   /**
-   * Obtains an instance of {@code DiscordianDate} from the year-of-era and day-of-year.
+   * Obtains an instance of `DiscordianDate` from the year-of-era and
+   * day-of-year.
    *
    * @param year      the year-of-era to represent.
-   * @param dayOfYear the day-of-year to represent, from 1 to 365 (366 if {@code year} is a leap year).
+   * @param dayOfYear the day-of-year to represent, from 1 to 365 (366 if `year`
+   *                  is a leap year).
    * @return the Discordian date, never null.
    * @throws DateTimeException if the value of any field is out of range.
    */
@@ -72,9 +75,11 @@ public final class DiscordianDate implements ChronoLocalDate, Serializable {
   }
 
   /**
-   * Obtains an instance of {@code DiscordianDate} representing the leap day in the specified year.
-   * This method does <em>not</em> validate input so if {@code year} is not a leap year in the
-   * Discordian calendar the instance returned will represent Chaos 60.
+   * Obtains an instance of `DiscordianDate` representing the leap day in the
+   * specified year.
+   *
+   * This method does _not_ validate input so if `year` is not a leap year in
+   * the Discordian calendar the instance returned will represent Chaos 60.
    *
    * @param year the year-of-era to represent.
    * @return the Discordian date, never null.
@@ -82,6 +87,10 @@ public final class DiscordianDate implements ChronoLocalDate, Serializable {
    */
   public static DiscordianDate ofLeapDay(int year) {
     return of(year, ST_TIBS_DAY);
+  }
+
+  public static DiscordianDate ofEpochDay(DiscordianChronology chrono, long epochDay) {
+    throw new UnsupportedOperationException();
   }
 
   private static int dayOfDiscordianYear(int prolepticYear, int season, int dayOfSeason) {
@@ -104,8 +113,8 @@ public final class DiscordianDate implements ChronoLocalDate, Serializable {
   }
 
   /**
-   * Gets the season represented by this instance in the range 1 to 5. If this instance represents
-   * a leap day this method will return <em>0</em>.
+   * Gets the season represented by this instance in the range 1 to 5. If this
+   * instance represents a leap day this method will return _0_.
    */
   public int getSeason() {
     int dayOfYear = getLeapAdjustedDayOfYear();
@@ -116,8 +125,8 @@ public final class DiscordianDate implements ChronoLocalDate, Serializable {
   }
 
   /**
-   * Gets the day-of-season represented by this instance in the range 1 to 5. If this instance represents
-   * a leap day this method will return <em>0</em>.
+   * Gets the day-of-season represented by this instance in the range 1 to 5. If
+   * this instance represents a leap day this method will return _0_.
    */
   public int getDayOfSeason() {
     int dayOfYear = getLeapAdjustedDayOfYear();
@@ -128,8 +137,8 @@ public final class DiscordianDate implements ChronoLocalDate, Serializable {
   }
 
   /**
-   * Gets the day-of-week represented by this instance in the range 1 to 5. If this instance represents
-   * a leap day this method will return <em>0</em>.
+   * Gets the day-of-week represented by this instance in the range 1 to 5. If
+   * this instance represents a leap day this method will return _0_.
    */
   public int getDayOfWeek() {
     int dayOfYear = getLeapAdjustedDayOfYear();
@@ -152,8 +161,9 @@ public final class DiscordianDate implements ChronoLocalDate, Serializable {
   }
 
   /**
-   * @return the day of the year adjusted to remove the leap day if this is a leap year. The value is thus convertible
-   * to season, day of week or season regardless of whether this is a leap year.
+   * @return the day of the year adjusted to remove the leap day if this is a
+   * leap year. The value is thus convertible to season, day of week or season
+   * regardless of whether this is a leap year.
    */
   private int getLeapAdjustedDayOfYear() {
     int dayOfYear = isoDate.getDayOfYear();
@@ -309,13 +319,14 @@ public final class DiscordianDate implements ChronoLocalDate, Serializable {
 
   /**
    * Returns a String representation of this instance.
-   * <p/>
+   *
    * The format used is compatible with the default format output by
-   * <a href="http://linuxcommand.org/man_pages/ddate1.html">the UNIX <em>ddate</em> command</a>.
-   * <p/>
-   * Because of the leap year handling in the Discordian calendar string representations of dates
-   * are not lexically sortable. The leap day has no season, day-of-season or day-of-week so it does
-   * not make sense to attempt a numeric representation of those values.
+   * http://linuxcommand.org/man_pages/ddate1.html[the UNIX _ddate_ command].
+   *
+   * Because of the leap year handling in the Discordian calendar string
+   * representations of dates are not lexically sortable. The leap day has no
+   * season, day-of-season or day-of-week so it does not make sense to attempt a
+   * numeric representation of those values.
    */
   @Override
   public String toString() {
