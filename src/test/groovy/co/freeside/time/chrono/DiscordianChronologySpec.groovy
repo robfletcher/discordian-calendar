@@ -105,6 +105,17 @@ class DiscordianChronologySpec extends Specification {
     3179 | 1 | 74
   }
 
+  @Unroll("The Discordian representation of epoch date #epochDay is #expected")
+  def "can get a Discordian date from an epoch day"() {
+    expect:
+    DiscordianChronology.INSTANCE.dateEpochDay(epochDay) == expected
+
+    where:
+    epochDay | expected
+    0        | DiscordianDate.of(3136, 1, 1)
+    16415    | DiscordianDate.of(3180, 5, 53)
+  }
+
   @Unroll
   def "#base with #adjuster is #expected"() {
     expect:

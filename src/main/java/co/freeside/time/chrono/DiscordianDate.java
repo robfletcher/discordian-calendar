@@ -89,8 +89,8 @@ public final class DiscordianDate implements ChronoLocalDate, Serializable {
     return of(year, ST_TIBS_DAY);
   }
 
-  public static DiscordianDate ofEpochDay(DiscordianChronology chrono, long epochDay) {
-    throw new UnsupportedOperationException();
+  public static DiscordianDate ofEpochDay(long epochDay) {
+    return new DiscordianDate(LocalDate.ofEpochDay(epochDay));
   }
 
   private static int dayOfDiscordianYear(int prolepticYear, int season, int dayOfSeason) {

@@ -89,7 +89,7 @@ public final class DiscordianChronology extends AbstractChronology
   }
 
   @Override public ChronoLocalDate dateEpochDay(long epochDay) {
-    return DiscordianDate.ofEpochDay(this, epochDay);
+    return DiscordianDate.ofEpochDay(epochDay);
   }
 
   @Override
