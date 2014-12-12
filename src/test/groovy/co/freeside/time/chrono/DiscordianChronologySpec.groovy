@@ -68,7 +68,7 @@ class DiscordianChronologySpec extends Specification {
   @Unroll
   def "Discordian date #ddate converts to ISO #iso"() {
     expect:
-    LocalDate.from(ddate) == iso
+    IsoChronology.INSTANCE.date(ddate) == iso
 
     where:
     data << data_samples
