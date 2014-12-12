@@ -53,7 +53,7 @@ import java.time.temporal.*;
  *
  * @author Rob Fletcher
  */
-public final class DiscordianChronology extends Chronology implements Serializable {
+public final class DiscordianChronology extends AbstractChronology implements Serializable {
 
     /**
      * Singleton instance of the Discordian chronology.
@@ -93,17 +93,17 @@ public final class DiscordianChronology extends Chronology implements Serializab
     }
 
     @Override
-    public ChronoLocalDate<DiscordianDate> date(int prolepticYear, int season, int dayOfSeason) {
+    public ChronoLocalDate date(int prolepticYear, int season, int dayOfSeason) {
         return DiscordianDate.of(prolepticYear, season, dayOfSeason);
     }
 
     @Override
-    public ChronoLocalDate<DiscordianDate> date(Era era, int yearOfEra, int month, int dayOfMonth) {
-        return (ChronoLocalDate<DiscordianDate>) super.date(era, yearOfEra, month, dayOfMonth);
+    public ChronoLocalDate date(Era era, int yearOfEra, int month, int dayOfMonth) {
+        return super.date(era, yearOfEra, month, dayOfMonth);
     }
 
     @Override
-    public ChronoLocalDate<DiscordianDate> date(TemporalAccessor temporal) {
+    public ChronoLocalDate date(TemporalAccessor temporal) {
         if (temporal instanceof DiscordianDate) {
             return (DiscordianDate) temporal;
         }
@@ -111,28 +111,28 @@ public final class DiscordianChronology extends Chronology implements Serializab
     }
 
     @Override
-    public ChronoLocalDate<DiscordianDate> dateYearDay(int prolepticYear, int dayOfYear) {
+    public ChronoLocalDate dateYearDay(int prolepticYear, int dayOfYear) {
         return DiscordianDate.of(prolepticYear, dayOfYear);
     }
 
     @Override
-    public ChronoLocalDate<DiscordianDate> dateYearDay(Era era, int yearOfEra, int dayOfYear) {
-        return (ChronoLocalDate<DiscordianDate>) super.dateYearDay(era, yearOfEra, dayOfYear);
+    public ChronoLocalDate dateYearDay(Era era, int yearOfEra, int dayOfYear) {
+        return super.dateYearDay(era, yearOfEra, dayOfYear);
     }
 
     @Override
-    public ChronoLocalDate<DiscordianDate> dateNow() {
-        return (ChronoLocalDate<DiscordianDate>) super.dateNow();
+    public ChronoLocalDate dateNow() {
+        return super.dateNow();
     }
 
     @Override
-    public ChronoLocalDate<DiscordianDate> dateNow(ZoneId zone) {
-        return (ChronoLocalDate<DiscordianDate>) super.dateNow(zone);
+    public ChronoLocalDate dateNow(ZoneId zone) {
+        return super.dateNow(zone);
     }
 
     @Override
-    public ChronoLocalDate<DiscordianDate> dateNow(Clock clock) {
-        return (ChronoLocalDate<DiscordianDate>) super.dateNow(clock);
+    public ChronoLocalDate dateNow(Clock clock) {
+        return super.dateNow(clock);
     }
 
     @Override

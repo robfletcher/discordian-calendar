@@ -32,6 +32,7 @@
 package org.threeten.extra.chrono;
 
 import java.util.*;
+import java.time.*;
 import java.time.chrono.*;
 import java.time.format.*;
 import java.time.zone.*;
@@ -63,12 +64,12 @@ enum DiscordianEra implements Era {
     }
 
     @Override
-    public ChronoLocalDate<?> date(int yearOfEra, int month, int day) {
+    public ChronoLocalDate date(int yearOfEra, int month, int day) {
         return getChronology().date(this, yearOfEra, month, day);
     }
 
     @Override
-    public ChronoLocalDate<?> dateYearDay(int yearOfEra, int dayOfYear) {
+    public ChronoLocalDate dateYearDay(int yearOfEra, int dayOfYear) {
         return getChronology().dateYearDay(this, yearOfEra, dayOfYear);
     }
 
