@@ -25,7 +25,7 @@ class DiscordianChronologySpec extends Specification {
     chrono != null
     chrono.id == "Discordian"
     chrono.getCalendarType() == null
-    chrono.is(DiscordianChronology.INSTANCE)
+    chrono == DiscordianChronology.INSTANCE
   }
 
   @Shared data_samples = [

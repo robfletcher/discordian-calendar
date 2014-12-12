@@ -79,7 +79,7 @@ public final class DiscordianChronology extends AbstractChronology
 
   private static final long serialVersionUID = 5856281505361396284L;
 
-  private DiscordianChronology() {
+  public DiscordianChronology() {
   }
 
   private Object readResolve() {
