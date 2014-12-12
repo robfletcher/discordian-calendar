@@ -181,18 +181,18 @@ class DiscordianChronologySpec extends Specification {
 
     where:
     ddate                                          | field                     | min | max
-    DiscordianChronology.INSTANCE.date(3179, 1, 1) | ChronoField.DAY_OF_WEEK   | 0   | DAYS_PER_WEEK
-    DiscordianChronology.INSTANCE.date(3178, 1, 1) | ChronoField.DAY_OF_WEEK   | 1   | DAYS_PER_WEEK
-    DiscordianChronology.INSTANCE.date(3066, 1, 1) | ChronoField.DAY_OF_WEEK   | 0   | DAYS_PER_WEEK
-    DiscordianChronology.INSTANCE.date(3166, 1, 1) | ChronoField.DAY_OF_WEEK   | 1   | DAYS_PER_WEEK
-    DiscordianChronology.INSTANCE.date(3179, 1, 1) | ChronoField.DAY_OF_MONTH  | 0   | DAYS_PER_SEASON
-    DiscordianChronology.INSTANCE.date(3178, 1, 1) | ChronoField.DAY_OF_MONTH  | 1   | DAYS_PER_SEASON
-    DiscordianChronology.INSTANCE.date(3066, 1, 1) | ChronoField.DAY_OF_MONTH  | 0   | DAYS_PER_SEASON
-    DiscordianChronology.INSTANCE.date(3166, 1, 1) | ChronoField.DAY_OF_MONTH  | 1   | DAYS_PER_SEASON
-    DiscordianChronology.INSTANCE.date(3179, 1, 1) | ChronoField.MONTH_OF_YEAR | 0   | SEASONS_PER_YEAR
-    DiscordianChronology.INSTANCE.date(3178, 1, 1) | ChronoField.MONTH_OF_YEAR | 1   | SEASONS_PER_YEAR
-    DiscordianChronology.INSTANCE.date(3066, 1, 1) | ChronoField.MONTH_OF_YEAR | 0   | SEASONS_PER_YEAR
-    DiscordianChronology.INSTANCE.date(3166, 1, 1) | ChronoField.MONTH_OF_YEAR | 1   | SEASONS_PER_YEAR
+    DiscordianChronology.INSTANCE.date(3179, 1, 1) | ChronoField.DAY_OF_WEEK   | 1   | DAYS_PER_WEEK
+    DiscordianChronology.INSTANCE.date(3178, 1, 1) | ChronoField.DAY_OF_WEEK   | 0   | DAYS_PER_WEEK
+    DiscordianChronology.INSTANCE.date(3066, 1, 1) | ChronoField.DAY_OF_WEEK   | 1   | DAYS_PER_WEEK
+    DiscordianChronology.INSTANCE.date(3166, 1, 1) | ChronoField.DAY_OF_WEEK   | 0   | DAYS_PER_WEEK
+    DiscordianChronology.INSTANCE.date(3179, 1, 1) | ChronoField.DAY_OF_MONTH  | 1   | DAYS_PER_SEASON
+    DiscordianChronology.INSTANCE.date(3178, 1, 1) | ChronoField.DAY_OF_MONTH  | 0   | DAYS_PER_SEASON
+    DiscordianChronology.INSTANCE.date(3066, 1, 1) | ChronoField.DAY_OF_MONTH  | 1   | DAYS_PER_SEASON
+    DiscordianChronology.INSTANCE.date(3166, 1, 1) | ChronoField.DAY_OF_MONTH  | 0   | DAYS_PER_SEASON
+    DiscordianChronology.INSTANCE.date(3179, 1, 1) | ChronoField.MONTH_OF_YEAR | 1   | SEASONS_PER_YEAR
+    DiscordianChronology.INSTANCE.date(3178, 1, 1) | ChronoField.MONTH_OF_YEAR | 0   | SEASONS_PER_YEAR
+    DiscordianChronology.INSTANCE.date(3066, 1, 1) | ChronoField.MONTH_OF_YEAR | 1   | SEASONS_PER_YEAR
+    DiscordianChronology.INSTANCE.date(3166, 1, 1) | ChronoField.MONTH_OF_YEAR | 0   | SEASONS_PER_YEAR
   }
 
   @Unroll
