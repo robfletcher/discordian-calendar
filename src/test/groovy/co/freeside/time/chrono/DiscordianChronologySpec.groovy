@@ -1,4 +1,4 @@
-package org.threeten.extra.chrono
+package co.freeside.time.chrono
 
 import spock.lang.Shared
 import spock.lang.Specification
@@ -12,8 +12,8 @@ import java.time.temporal.ChronoField
 import java.time.temporal.ChronoUnit
 import java.time.temporal.TemporalAdjusters
 
-import static org.threeten.extra.chrono.DiscordianChronology.*
-import static org.threeten.extra.chrono.DiscordianDate.ST_TIBS_DAY
+import static co.freeside.time.chrono.DiscordianChronology.*
+import static co.freeside.time.chrono.DiscordianDate.ST_TIBS_DAY
 
 class DiscordianChronologySpec extends Specification {
 
