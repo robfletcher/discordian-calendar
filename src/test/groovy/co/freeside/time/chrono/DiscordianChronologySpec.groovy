@@ -108,7 +108,7 @@ class DiscordianChronologySpec extends Specification {
   @Unroll
   def "#base with #adjuster is #expected"() {
     expect:
-    base.with(adjuster) == DiscordianChronology.INSTANCE.date(3179, 1, 73)
+    base.with(adjuster) == expected
 
     where:
     base                                                         | adjuster                                       | expected
