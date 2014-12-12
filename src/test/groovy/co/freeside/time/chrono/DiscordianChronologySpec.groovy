@@ -17,6 +17,8 @@ import static co.freeside.time.chrono.DiscordianDate.ST_TIBS_DAY
 
 class DiscordianChronologySpec extends Specification {
 
+  @Shared chronology = DiscordianChronology.INSTANCE
+
   def "can find Discordian chronology by name"() {
     given:
     def chrono = Chronology.of("Discordian")
@@ -25,44 +27,44 @@ class DiscordianChronologySpec extends Specification {
     chrono != null
     chrono.id == "Discordian"
     chrono.getCalendarType() == null
-    chrono == DiscordianChronology.INSTANCE
+    chrono == chronology
   }
 
   @Shared data_samples = [
       // YOLD era starts in 1166 BC
-      [DiscordianChronology.INSTANCE.date(0, 1, 1), LocalDate.of(-1166, 1, 1)],
+      [chronology.date(0, 1, 1), LocalDate.of(-1166, 1, 1)],
       // sanity check current date
-      [DiscordianChronology.INSTANCE.date(3179, 2, 19), LocalDate.of(2013, 4, 2)],
+      [chronology.date(3179, 2, 19), LocalDate.of(2013, 4, 2)],
       // leap day occurs on day 60 of the year but is *not* considered part of the 1st season
-      [DiscordianChronology.INSTANCE.date(3179, 1, 59), LocalDate.of(2013, 2, 28)],
-      [DiscordianChronology.INSTANCE.date(3179, 1, 60), LocalDate.of(2013, 3, 1)],
+      [chronology.date(3179, 1, 59), LocalDate.of(2013, 2, 28)],
+      [chronology.date(3179, 1, 60), LocalDate.of(2013, 3, 1)],
       // non leap year
-      [DiscordianChronology.INSTANCE.date(3178, 1, 60), LocalDate.of(2012, 3, 1)],
+      [chronology.date(3178, 1, 60), LocalDate.of(2012, 3, 1)],
       // leap year
-      [DiscordianChronology.INSTANCE.dateYearDay(3178, ST_TIBS_DAY), LocalDate.of(2012, 2, 29)],
-      [DiscordianChronology.INSTANCE.dateYearDay(3178, ST_TIBS_DAY + 1), LocalDate.of(2012, 3, 1)],
+      [chronology.dateYearDay(3178, ST_TIBS_DAY), LocalDate.of(2012, 2, 29)],
+      [chronology.dateYearDay(3178, ST_TIBS_DAY + 1), LocalDate.of(2012, 3, 1)],
       // the season boundaries occur on the same Gregorian day every year...
-      [DiscordianChronology.INSTANCE.date(3179, 1, 1), LocalDate.of(2013, 1, 1)],
-      [DiscordianChronology.INSTANCE.date(3179, 1, 73), LocalDate.of(2013, 3, 14)],
-      [DiscordianChronology.INSTANCE.date(3179, 2, 1), LocalDate.of(2013, 3, 15)],
-      [DiscordianChronology.INSTANCE.date(3179, 2, 73), LocalDate.of(2013, 5, 26)],
-      [DiscordianChronology.INSTANCE.date(3179, 3, 1), LocalDate.of(2013, 5, 27)],
-      [DiscordianChronology.INSTANCE.date(3179, 3, 73), LocalDate.of(2013, 8, 7)],
-      [DiscordianChronology.INSTANCE.date(3179, 4, 1), LocalDate.of(2013, 8, 8)],
-      [DiscordianChronology.INSTANCE.date(3179, 4, 73), LocalDate.of(2013, 10, 19)],
-      [DiscordianChronology.INSTANCE.date(3179, 5, 1), LocalDate.of(2013, 10, 20)],
-      [DiscordianChronology.INSTANCE.date(3179, 5, 73), LocalDate.of(2013, 12, 31)],
+      [chronology.date(3179, 1, 1), LocalDate.of(2013, 1, 1)],
+      [chronology.date(3179, 1, 73), LocalDate.of(2013, 3, 14)],
+      [chronology.date(3179, 2, 1), LocalDate.of(2013, 3, 15)],
+      [chronology.date(3179, 2, 73), LocalDate.of(2013, 5, 26)],
+      [chronology.date(3179, 3, 1), LocalDate.of(2013, 5, 27)],
+      [chronology.date(3179, 3, 73), LocalDate.of(2013, 8, 7)],
+      [chronology.date(3179, 4, 1), LocalDate.of(2013, 8, 8)],
+      [chronology.date(3179, 4, 73), LocalDate.of(2013, 10, 19)],
+      [chronology.date(3179, 5, 1), LocalDate.of(2013, 10, 20)],
+      [chronology.date(3179, 5, 73), LocalDate.of(2013, 12, 31)],
       // ... even if it is a leap year
-      [DiscordianChronology.INSTANCE.date(3178, 1, 1), LocalDate.of(2012, 1, 1)],
-      [DiscordianChronology.INSTANCE.date(3178, 1, 73), LocalDate.of(2012, 3, 14)],
-      [DiscordianChronology.INSTANCE.date(3178, 2, 1), LocalDate.of(2012, 3, 15)],
-      [DiscordianChronology.INSTANCE.date(3178, 2, 73), LocalDate.of(2012, 5, 26)],
-      [DiscordianChronology.INSTANCE.date(3178, 3, 1), LocalDate.of(2012, 5, 27)],
-      [DiscordianChronology.INSTANCE.date(3178, 3, 73), LocalDate.of(2012, 8, 7)],
-      [DiscordianChronology.INSTANCE.date(3178, 4, 1), LocalDate.of(2012, 8, 8)],
-      [DiscordianChronology.INSTANCE.date(3178, 4, 73), LocalDate.of(2012, 10, 19)],
-      [DiscordianChronology.INSTANCE.date(3178, 5, 1), LocalDate.of(2012, 10, 20)],
-      [DiscordianChronology.INSTANCE.date(3178, 5, 73), LocalDate.of(2012, 12, 31)],
+      [chronology.date(3178, 1, 1), LocalDate.of(2012, 1, 1)],
+      [chronology.date(3178, 1, 73), LocalDate.of(2012, 3, 14)],
+      [chronology.date(3178, 2, 1), LocalDate.of(2012, 3, 15)],
+      [chronology.date(3178, 2, 73), LocalDate.of(2012, 5, 26)],
+      [chronology.date(3178, 3, 1), LocalDate.of(2012, 5, 27)],
+      [chronology.date(3178, 3, 73), LocalDate.of(2012, 8, 7)],
+      [chronology.date(3178, 4, 1), LocalDate.of(2012, 8, 8)],
+      [chronology.date(3178, 4, 73), LocalDate.of(2012, 10, 19)],
+      [chronology.date(3178, 5, 1), LocalDate.of(2012, 10, 20)],
+      [chronology.date(3178, 5, 73), LocalDate.of(2012, 12, 31)],
   ]
 
   @Unroll
@@ -78,7 +80,7 @@ class DiscordianChronologySpec extends Specification {
 
   @Unroll
   def "ISO date #iso converts to Discordian #ddate"() {
-    DiscordianChronology.INSTANCE.date(iso) == ddate
+    chronology.date(iso) == ddate
 
     where:
     data << data_samples
@@ -89,7 +91,7 @@ class DiscordianChronologySpec extends Specification {
   @Unroll
   def "#year, #season, #dayOfSeason is not a valid date"() {
     when:
-    DiscordianChronology.INSTANCE.date(year, season, dayOfSeason)
+    chronology.date(year, season, dayOfSeason)
 
     then:
     thrown DateTimeException
@@ -108,7 +110,7 @@ class DiscordianChronologySpec extends Specification {
   @Unroll("The Discordian representation of epoch date #epochDay is #expected")
   def "can get a Discordian date from an epoch day"() {
     expect:
-    DiscordianChronology.INSTANCE.dateEpochDay(epochDay) == expected
+    chronology.dateEpochDay(epochDay) == expected
 
     where:
     epochDay | expected
@@ -122,37 +124,37 @@ class DiscordianChronologySpec extends Specification {
     base.with(adjuster) == expected
 
     where:
-    base                                                         | adjuster                                       | expected
-    DiscordianChronology.INSTANCE.date(3179, 1, 1)               | TemporalAdjusters.lastDayOfMonth()             | DiscordianChronology.INSTANCE.date(3179, 1, 73)
-    DiscordianChronology.INSTANCE.date(3178, 1, ST_TIBS_DAY - 1) | TemporalAdjusters.lastDayOfMonth()             | DiscordianChronology.INSTANCE.date(3178, 1, 73)
-    DiscordianChronology.INSTANCE.dateYearDay(3178, ST_TIBS_DAY) | TemporalAdjusters.lastDayOfMonth()             | DiscordianChronology.INSTANCE.date(3178, 1, 73)
-    DiscordianChronology.INSTANCE.date(3179, 1, 1)               | TemporalAdjusters.lastInMonth(DayOfWeek.of(1)) | DiscordianChronology.INSTANCE.date(3179, 1, 71)
-    DiscordianChronology.INSTANCE.date(3178, 1, 1)               | TemporalAdjusters.lastInMonth(DayOfWeek.of(1)) | DiscordianChronology.INSTANCE.date(3178, 1, 71)
+    base                                      | adjuster                                       | expected
+    chronology.date(3179, 1, 1)               | TemporalAdjusters.lastDayOfMonth()             | chronology.date(3179, 1, 73)
+    chronology.date(3178, 1, ST_TIBS_DAY - 1) | TemporalAdjusters.lastDayOfMonth()             | chronology.date(3178, 1, 73)
+    chronology.dateYearDay(3178, ST_TIBS_DAY) | TemporalAdjusters.lastDayOfMonth()             | chronology.date(3178, 1, 73)
+    chronology.date(3179, 1, 1)               | TemporalAdjusters.lastInMonth(DayOfWeek.of(1)) | chronology.date(3179, 1, 71)
+    chronology.date(3178, 1, 1)               | TemporalAdjusters.lastInMonth(DayOfWeek.of(1)) | chronology.date(3178, 1, 71)
   }
 
   @Unroll
-  def "#jdate converts to a string as #expected"() {
+  def "#ddate converts to a string as #expected"() {
     expect:
-    jdate.toString() == expected
+    ddate.toString() == expected
 
     where:
-    jdate                                           | expected
-    DiscordianChronology.INSTANCE.date(0, 1, 1)     | "Sweetmorn, Chaos 1, 0 YOLD"
-    DiscordianChronology.INSTANCE.date(3179, 2, 19) | "Boomtime, Discord 19, 3179 YOLD"
+    ddate                        | expected
+    chronology.date(0, 1, 1)     | "Sweetmorn, Chaos 1, 0 YOLD"
+    chronology.date(3179, 2, 19) | "Boomtime, Discord 19, 3179 YOLD"
     // 60th day of the year is St. Tib's Day if it is a leap year
-    DiscordianChronology.INSTANCE.dateYearDay(3178, 60) | "St. Tib's Day! 3178 YOLD"
-    DiscordianChronology.INSTANCE.dateYearDay(3179, 60) | "Setting Orange, Chaos 60, 3179 YOLD"
+    chronology.dateYearDay(3178, 60) | "St. Tib's Day! 3178 YOLD"
+    chronology.dateYearDay(3179, 60) | "Setting Orange, Chaos 60, 3179 YOLD"
     // St. Tib's Day is not part of the week, so day names after it should be the same in a leap year
-    DiscordianChronology.INSTANCE.date(3179, 1, 60) | "Setting Orange, Chaos 60, 3179 YOLD"
-    DiscordianChronology.INSTANCE.date(3178, 1, 60) | "Setting Orange, Chaos 60, 3178 YOLD"
+    chronology.date(3179, 1, 60) | "Setting Orange, Chaos 60, 3179 YOLD"
+    chronology.date(3178, 1, 60) | "Setting Orange, Chaos 60, 3178 YOLD"
   }
 
   def "Discordian chronology equals itself"() {
-    DiscordianChronology.INSTANCE == DiscordianChronology.INSTANCE
+    chronology == chronology
   }
 
   def "Discordian chronology does not equal another chronology"() {
-    DiscordianChronology.INSTANCE != IsoChronology.INSTANCE
+    chronology != IsoChronology.INSTANCE
   }
 
   def "Discordian dates are comparable"() {
@@ -161,27 +163,27 @@ class DiscordianChronologySpec extends Specification {
     ddate2 > ddate1
 
     where:
-    ddate1 = DiscordianChronology.INSTANCE.dateYearDay(3178, ST_TIBS_DAY)
-    ddate2 = DiscordianChronology.INSTANCE.dateYearDay(3178, ST_TIBS_DAY + 1)
+    ddate1 = chronology.dateYearDay(3178, ST_TIBS_DAY)
+    ddate2 = chronology.dateYearDay(3178, ST_TIBS_DAY + 1)
   }
 
   @Shared data_leapYears = [
-      [DiscordianChronology.INSTANCE.date(3179, 1, 1), false],
-      [DiscordianChronology.INSTANCE.date(3178, 1, 1), true],
-      [DiscordianChronology.INSTANCE.date(3066, 1, 1), false],
-      [DiscordianChronology.INSTANCE.date(3166, 1, 1), true],
+      [chronology.date(3179, 1, 1), false],
+      [chronology.date(3178, 1, 1), true],
+      [chronology.date(3066, 1, 1), false],
+      [chronology.date(3166, 1, 1), true],
   ]
 
-  def test_isLeapYear() {
+  def "Discordian dates have leap years"() {
     ddate.isLeapYear() == isLeapYear
-    DiscordianChronology.INSTANCE.isLeapYear(ddate.getYear()) == isLeapYear
+    chronology.isLeapYear(ddate.getYear()) == isLeapYear
 
     where:
-    ddate                                          | isLeapYear
-    DiscordianChronology.INSTANCE.date(3179, 1, 1) | false
-    DiscordianChronology.INSTANCE.date(3178, 1, 1) | true
-    DiscordianChronology.INSTANCE.date(3066, 1, 1) | false
-    DiscordianChronology.INSTANCE.date(3166, 1, 1) | true
+    ddate                       | isLeapYear
+    chronology.date(3179, 1, 1) | false
+    chronology.date(3178, 1, 1) | true
+    chronology.date(3066, 1, 1) | false
+    chronology.date(3166, 1, 1) | true
   }
 
   @Unroll
@@ -191,19 +193,19 @@ class DiscordianChronologySpec extends Specification {
     ddate.range(field).getMaximum() == max
 
     where:
-    ddate                                          | field                     | min | max
-    DiscordianChronology.INSTANCE.date(3179, 1, 1) | ChronoField.DAY_OF_WEEK   | 1   | DAYS_PER_WEEK
-    DiscordianChronology.INSTANCE.date(3178, 1, 1) | ChronoField.DAY_OF_WEEK   | 0   | DAYS_PER_WEEK
-    DiscordianChronology.INSTANCE.date(3066, 1, 1) | ChronoField.DAY_OF_WEEK   | 1   | DAYS_PER_WEEK
-    DiscordianChronology.INSTANCE.date(3166, 1, 1) | ChronoField.DAY_OF_WEEK   | 0   | DAYS_PER_WEEK
-    DiscordianChronology.INSTANCE.date(3179, 1, 1) | ChronoField.DAY_OF_MONTH  | 1   | DAYS_PER_SEASON
-    DiscordianChronology.INSTANCE.date(3178, 1, 1) | ChronoField.DAY_OF_MONTH  | 0   | DAYS_PER_SEASON
-    DiscordianChronology.INSTANCE.date(3066, 1, 1) | ChronoField.DAY_OF_MONTH  | 1   | DAYS_PER_SEASON
-    DiscordianChronology.INSTANCE.date(3166, 1, 1) | ChronoField.DAY_OF_MONTH  | 0   | DAYS_PER_SEASON
-    DiscordianChronology.INSTANCE.date(3179, 1, 1) | ChronoField.MONTH_OF_YEAR | 1   | SEASONS_PER_YEAR
-    DiscordianChronology.INSTANCE.date(3178, 1, 1) | ChronoField.MONTH_OF_YEAR | 0   | SEASONS_PER_YEAR
-    DiscordianChronology.INSTANCE.date(3066, 1, 1) | ChronoField.MONTH_OF_YEAR | 1   | SEASONS_PER_YEAR
-    DiscordianChronology.INSTANCE.date(3166, 1, 1) | ChronoField.MONTH_OF_YEAR | 0   | SEASONS_PER_YEAR
+    ddate                       | field                     | min | max
+    chronology.date(3179, 1, 1) | ChronoField.DAY_OF_WEEK   | 1   | DAYS_PER_WEEK
+    chronology.date(3178, 1, 1) | ChronoField.DAY_OF_WEEK   | 0   | DAYS_PER_WEEK
+    chronology.date(3066, 1, 1) | ChronoField.DAY_OF_WEEK   | 1   | DAYS_PER_WEEK
+    chronology.date(3166, 1, 1) | ChronoField.DAY_OF_WEEK   | 0   | DAYS_PER_WEEK
+    chronology.date(3179, 1, 1) | ChronoField.DAY_OF_MONTH  | 1   | DAYS_PER_SEASON
+    chronology.date(3178, 1, 1) | ChronoField.DAY_OF_MONTH  | 0   | DAYS_PER_SEASON
+    chronology.date(3066, 1, 1) | ChronoField.DAY_OF_MONTH  | 1   | DAYS_PER_SEASON
+    chronology.date(3166, 1, 1) | ChronoField.DAY_OF_MONTH  | 0   | DAYS_PER_SEASON
+    chronology.date(3179, 1, 1) | ChronoField.MONTH_OF_YEAR | 1   | SEASONS_PER_YEAR
+    chronology.date(3178, 1, 1) | ChronoField.MONTH_OF_YEAR | 0   | SEASONS_PER_YEAR
+    chronology.date(3066, 1, 1) | ChronoField.MONTH_OF_YEAR | 1   | SEASONS_PER_YEAR
+    chronology.date(3166, 1, 1) | ChronoField.MONTH_OF_YEAR | 0   | SEASONS_PER_YEAR
   }
 
   @Unroll
@@ -220,7 +222,7 @@ class DiscordianChronologySpec extends Specification {
     ChronoField.DAY_OF_MONTH  | DAYS_PER_SEASON
     ChronoField.MONTH_OF_YEAR | 5
 
-    range = DiscordianChronology.INSTANCE.range(field)
+    range = chronology.range(field)
   }
 
   @Unroll("#ddate plus #value #unit is #expected")
@@ -229,16 +231,16 @@ class DiscordianChronologySpec extends Specification {
     ddate.plus(value, unit) == expected
 
     where:
-    ddate                                                        | unit                 | expected
-    DiscordianChronology.INSTANCE.date(3179, 2, 29)              | ChronoUnit.DAYS      | DiscordianChronology.INSTANCE.date(3179, 2, 30)
-    DiscordianChronology.INSTANCE.date(3179, 2, 29)              | ChronoUnit.WEEKS     | DiscordianChronology.INSTANCE.date(3179, 2, 34)
-    DiscordianChronology.INSTANCE.date(3179, 2, 29)              | ChronoUnit.MONTHS    | DiscordianChronology.INSTANCE.date(3179, 3, 29)
-    DiscordianChronology.INSTANCE.date(3179, 2, 29)              | ChronoUnit.YEARS     | DiscordianChronology.INSTANCE.date(3180, 2, 29)
-    DiscordianChronology.INSTANCE.date(3179, 2, 29)              | ChronoUnit.CENTURIES | DiscordianChronology.INSTANCE.date(3279, 2, 29)
-    DiscordianChronology.INSTANCE.dateYearDay(3178, ST_TIBS_DAY) | ChronoUnit.DAYS      | DiscordianChronology.INSTANCE.date(3178, 1, 60)
-    DiscordianChronology.INSTANCE.dateYearDay(3178, ST_TIBS_DAY) | ChronoUnit.WEEKS     | DiscordianChronology.INSTANCE.date(3178, 1, 64)
-    DiscordianChronology.INSTANCE.dateYearDay(3178, ST_TIBS_DAY) | ChronoUnit.MONTHS    | DiscordianChronology.INSTANCE.date(3178, 2, 59)
-    DiscordianChronology.INSTANCE.dateYearDay(3178, ST_TIBS_DAY) | ChronoUnit.YEARS     | DiscordianChronology.INSTANCE.date(3179, 1, 59)
+    ddate                                     | unit                 | expected
+    chronology.date(3179, 2, 29)              | ChronoUnit.DAYS      | chronology.date(3179, 2, 30)
+    chronology.date(3179, 2, 29)              | ChronoUnit.WEEKS     | chronology.date(3179, 2, 34)
+    chronology.date(3179, 2, 29)              | ChronoUnit.MONTHS    | chronology.date(3179, 3, 29)
+    chronology.date(3179, 2, 29)              | ChronoUnit.YEARS     | chronology.date(3180, 2, 29)
+    chronology.date(3179, 2, 29)              | ChronoUnit.CENTURIES | chronology.date(3279, 2, 29)
+    chronology.dateYearDay(3178, ST_TIBS_DAY) | ChronoUnit.DAYS      | chronology.date(3178, 1, 60)
+    chronology.dateYearDay(3178, ST_TIBS_DAY) | ChronoUnit.WEEKS     | chronology.date(3178, 1, 64)
+    chronology.dateYearDay(3178, ST_TIBS_DAY) | ChronoUnit.MONTHS    | chronology.date(3178, 2, 59)
+    chronology.dateYearDay(3178, ST_TIBS_DAY) | ChronoUnit.YEARS     | chronology.date(3179, 1, 59)
 
     value = 1
   }
@@ -249,14 +251,14 @@ class DiscordianChronologySpec extends Specification {
     ddate1.until(ddate2, unit) == expected
 
     where:
-    ddate1                                          | ddate2                                          | unit              | expected
-    DiscordianChronology.INSTANCE.date(3179, 2, 29) | DiscordianChronology.INSTANCE.date(3179, 2, 30) | ChronoUnit.DAYS   | 1
-    DiscordianChronology.INSTANCE.date(3179, 2, 29) | DiscordianChronology.INSTANCE.date(3179, 2, 28) | ChronoUnit.DAYS   | -1
-    DiscordianChronology.INSTANCE.date(3179, 2, 29) | DiscordianChronology.INSTANCE.date(3179, 3, 28) | ChronoUnit.MONTHS | 0
-    DiscordianChronology.INSTANCE.date(3179, 2, 29) | DiscordianChronology.INSTANCE.date(3179, 3, 29) | ChronoUnit.MONTHS | 1
-    DiscordianChronology.INSTANCE.date(3179, 2, 29) | DiscordianChronology.INSTANCE.date(3179, 4, 28) | ChronoUnit.MONTHS | 1
-    DiscordianChronology.INSTANCE.date(3179, 2, 29) | DiscordianChronology.INSTANCE.date(3179, 2, 24) | ChronoUnit.WEEKS  | -1
-    DiscordianChronology.INSTANCE.date(-1, 1, 1)    | DiscordianChronology.INSTANCE.date(3179, 2, 29) | ChronoUnit.ERAS   | 0
+    ddate1                       | ddate2                       | unit              | expected
+    chronology.date(3179, 2, 29) | chronology.date(3179, 2, 30) | ChronoUnit.DAYS   | 1
+    chronology.date(3179, 2, 29) | chronology.date(3179, 2, 28) | ChronoUnit.DAYS   | -1
+    chronology.date(3179, 2, 29) | chronology.date(3179, 3, 28) | ChronoUnit.MONTHS | 0
+    chronology.date(3179, 2, 29) | chronology.date(3179, 3, 29) | ChronoUnit.MONTHS | 1
+    chronology.date(3179, 2, 29) | chronology.date(3179, 4, 28) | ChronoUnit.MONTHS | 1
+    chronology.date(3179, 2, 29) | chronology.date(3179, 2, 24) | ChronoUnit.WEEKS  | -1
+    chronology.date(-1, 1, 1)    | chronology.date(3179, 2, 29) | ChronoUnit.ERAS   | 0
   }
 
   @Unroll("Attempting to get the difference between a Discordian date and a #end.class.simpleName causes an exception")
@@ -272,7 +274,7 @@ class DiscordianChronologySpec extends Specification {
     ZonedDateTime.now()                 | _
     HijrahChronology.INSTANCE.dateNow() | _
 
-    start = DiscordianChronology.INSTANCE.dateNow()
+    start = chronology.dateNow()
     unit = ChronoUnit.DAYS
   }
 
@@ -282,18 +284,18 @@ class DiscordianChronologySpec extends Specification {
     startDate.until(endDate) == expectedPeriod
 
     where:
-    startDate                                       | endDate                                         | expectedPeriod
-    DiscordianChronology.INSTANCE.dateNow()         | DiscordianChronology.INSTANCE.dateNow()         | Period.ZERO
-    DiscordianChronology.INSTANCE.date(3179, 1, 1)  | DiscordianChronology.INSTANCE.date(3179, 5, 73) | Period.of(0, 4, 72)
-    DiscordianChronology.INSTANCE.date(1, 1, 1)     | DiscordianChronology.INSTANCE.date(3179, 5, 73) | Period.of(3178, 4, 72)
-    DiscordianChronology.INSTANCE.date(3179, 5, 73) | DiscordianChronology.INSTANCE.date(3179, 1, 1)  | Period.of(0, -4, -72)
-    DiscordianChronology.INSTANCE.date(-1, 5, 73)   | DiscordianChronology.INSTANCE.date(1, 1, 1)     | Period.of(1, 0, 1)
+    startDate                    | endDate                      | expectedPeriod
+    chronology.dateNow()         | chronology.dateNow()         | Period.ZERO
+    chronology.date(3179, 1, 1)  | chronology.date(3179, 5, 73) | Period.of(0, 4, 72)
+    chronology.date(1, 1, 1)     | chronology.date(3179, 5, 73) | Period.of(3178, 4, 72)
+    chronology.date(3179, 5, 73) | chronology.date(3179, 1, 1)  | Period.of(0, -4, -72)
+    chronology.date(-1, 5, 73)   | chronology.date(1, 1, 1)     | Period.of(1, 0, 1)
     // St. Tib's Day handling is a little odd as it is only counted in the period if it is one of the operands
     // this allows days > St. Tib's Day to always be exact years apart regardless of whether there was a leap
     // year in between.
-    DiscordianChronology.INSTANCE.dateYearDay(3178, ST_TIBS_DAY) | DiscordianChronology.INSTANCE.date(3179, 1, 60) | Period.of(1, 0, 0)
-    DiscordianChronology.INSTANCE.date(3179, 1, 60) | DiscordianChronology.INSTANCE.dateYearDay(3178, ST_TIBS_DAY) | Period.of(-1, 0, 0)
-    DiscordianChronology.INSTANCE.date(3179, 1, 60) | DiscordianChronology.INSTANCE.date(3178, 1, 60) | Period.of(-1, 0, 0)
-    DiscordianChronology.INSTANCE.date(3066, 1, 1) | DiscordianChronology.INSTANCE.date(3179, 1, 1) | Period.of(113, 0, 0)
+    chronology.dateYearDay(3178, ST_TIBS_DAY) | chronology.date(3179, 1, 60) | Period.of(1, 0, 0)
+    chronology.date(3179, 1, 60) | chronology.dateYearDay(3178, ST_TIBS_DAY) | Period.of(-1, 0, 0)
+    chronology.date(3179, 1, 60) | chronology.date(3178, 1, 60) | Period.of(-1, 0, 0)
+    chronology.date(3066, 1, 1) | chronology.date(3179, 1, 1) | Period.of(113, 0, 0)
   }
 }
