@@ -1,0 +1,8 @@
+<!DOCTYPE suppressions PUBLIC
+  "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+  "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+  <!-- TODO: checkstyle doesn't support Java 8 lambda syntax so have to suppress checks for this file -->
+  <suppress files="TimeTypesArgumentFactory\.java" checks=".*"/>
+</suppressions>

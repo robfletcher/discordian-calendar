@@ -1,0 +1,18 @@
+apply plugin: "groovy"
+
+dependencies {
+  testCompile "org.codehaus.groovy:groovy-all:$versions.groovy:indy"
+  testCompile("org.spockframework:spock-core:$versions.spock") {
+    exclude module: "groovy-all"
+  }
+}
+
+plugins.withType(JavaPlugin) {
+  sourceCompatibility = "1.8"
+  targetCompatibility = "1.8"
+}
+
+tasks.withType(GroovyCompile) {
+  compileGroovy.options.encoding = "UTF-8"
+  groovyOptions.optimizationOptions.indy = true
+}
