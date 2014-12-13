@@ -2,7 +2,14 @@
 
 An implementation of http://en.wikipedia.org/wiki/Discordian_calendar[the Discordian Calendar] for the Java 8 time API.
 
+[.float-group]
+--
+[.left]
 image:https://travis-ci.org/robfletcher/discordian-calendar.svg?branch=master["Build Status", link="https://travis-ci.org/robfletcher/discordian-calendar"]
+
+[.left]
+image::https://api.bintray.com/packages/robfletcher/maven/discordian-calendar/images/download.svg[link="https://bintray.com/robfletcher/maven/discordian-calendar/_latestVersion"]
+--
 
 Hail Eris!
 All Hail Discordia!
