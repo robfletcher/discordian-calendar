@@ -1,3 +1,4 @@
+apply plugin: "maven-publish"
 apply plugin: "com.jfrog.bintray"
 apply from: "$rootDir/gradle/credentials.gradle"
 
@@ -17,13 +18,29 @@ artifacts {
   archives sourceJar, javadocJar
 }
 
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      from components.java
+
+      artifact sourceJar {
+        classifier "sources"
+      }
+
+      artifact javadocJar {
+        classifier "javadoc"
+      }
+    }
+  }
+}
+
 bintray {
   user = bintrayUsername
   key = bintrayApiKey
+  publications = ["mavenJava"]
   publish = true
   pkg {
     repo = "maven"
-    userOrg = "co.freeside"
     name = "discordian-calendar"
     desc = "An implementation of the Discordian calendar for the Java 8 date/time API"
 
