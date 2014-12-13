@@ -1,8 +1,12 @@
 package co.freeside.time.chrono;
 
 import java.io.Serializable;
-import java.time.*;
-import java.time.chrono.*;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.chrono.AbstractChronology;
+import java.time.chrono.ChronoLocalDate;
+import java.time.chrono.Era;
+import java.time.chrono.IsoChronology;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
 import java.time.temporal.ValueRange;
@@ -71,11 +75,6 @@ public final class DiscordianChronology extends AbstractChronology
   }
 
   @Override
-  public ChronoLocalDate date(Era era, int yearOfEra, int month, int dayOfMonth) {
-    return super.date(era, yearOfEra, month, dayOfMonth);
-  }
-
-  @Override
   public ChronoLocalDate date(TemporalAccessor temporal) {
     if (temporal instanceof DiscordianDate) {
       return (DiscordianDate) temporal;
@@ -90,41 +89,6 @@ public final class DiscordianChronology extends AbstractChronology
 
   @Override public ChronoLocalDate dateEpochDay(long epochDay) {
     return DiscordianDate.ofEpochDay(epochDay);
-  }
-
-  @Override
-  public ChronoLocalDate dateYearDay(Era era, int yearOfEra, int dayOfYear) {
-    return super.dateYearDay(era, yearOfEra, dayOfYear);
-  }
-
-  @Override
-  public ChronoLocalDate dateNow() {
-    return super.dateNow();
-  }
-
-  @Override
-  public ChronoLocalDate dateNow(ZoneId zone) {
-    return super.dateNow(zone);
-  }
-
-  @Override
-  public ChronoLocalDate dateNow(Clock clock) {
-    return super.dateNow(clock);
-  }
-
-  @Override
-  public ChronoLocalDateTime<DiscordianDate> localDateTime(TemporalAccessor temporal) {
-    return (ChronoLocalDateTime<DiscordianDate>) super.localDateTime(temporal);
-  }
-
-  @Override
-  public ChronoZonedDateTime<DiscordianDate> zonedDateTime(TemporalAccessor temporal) {
-    return (ChronoZonedDateTime<DiscordianDate>) super.zonedDateTime(temporal);
-  }
-
-  @Override
-  public ChronoZonedDateTime<DiscordianDate> zonedDateTime(Instant instant, ZoneId zone) {
-    return (ChronoZonedDateTime<DiscordianDate>) super.zonedDateTime(instant, zone);
   }
 
   @Override
