@@ -16,7 +16,7 @@ import java.time.temporal.*;
  * pattern as an ISO year this class is simply a wrapper around
  * {@link LocalDate}.
  *
- * Note that since _St. Tib's Day+ is considered "outside" the Discordian season
+ * Note that since _St. Tib's Day_ is considered "outside" the Discordian season
  * and week the methods {@link #getDayOfWeek()}, {@link #getDayOfSeason()} and
  * {@link #getSeason()} will return `0` for an instance of this class that
  * represents the leap day (the 60th day of a leap year).
