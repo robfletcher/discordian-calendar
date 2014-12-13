@@ -17,7 +17,7 @@ import static java.time.temporal.ChronoField.ERA;
  *
  * @author Rob Fletcher
  */
-enum DiscordianEra implements Era {
+public enum DiscordianEra implements Era {
 
   /**
    * The singleton instance for the Year of Our Lady of Discord era (1166-01-01
