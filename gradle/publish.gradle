@@ -1,5 +1,4 @@
-apply plugin: "artifactory-publish"
-apply plugin: "maven-publish"
+apply plugin: "com.jfrog.bintray"
 apply from: "$rootDir/gradle/credentials.gradle"
 
 task sourceJar(type: Jar) {
@@ -18,69 +17,25 @@ artifacts {
   archives sourceJar, javadocJar
 }
 
-artifactory {
-  contextUrl = "http://oss.jfrog.org/"
-  publish {
-    repository {
-      repoKey = isSnapshot ? "oss-snapshot-local" : "oss-release-local"
-      username = bintrayUsername
-      password = bintrayApiKey
-    }
-    defaults {
-      publications("mavenCustom")
-    }
-  }
-  resolve {
-    repository {
-      repoKey = "libs-release"
-    }
-  }
-}
+bintray {
+  user = bintrayUsername
+  key = bintrayApiKey
+  publish = true
+  pkg {
+    repo = "maven"
+    userOrg = "co.freeside"
+    name = "discordian-calendar"
+    desc = "An implementation of the Discordian calendar for the Java 8 date/time API"
 
-def pomConfig = {
-  name project.name
-  description project.pomDescription
-  url "http://git.io/discordian-calendar"
-  inceptionYear "2014"
-  licenses {
-    license([:]) {
-      name "The Apache Software License, Version 2.0"
-      url "http://www.apache.org/licenses/LICENSE-2.0.txt"
-      distribution "repo"
-    }
-  }
-  scm {
-    url "https://github.com/$project.gitHubProject"
-    connection "https://github.com/${project.gitHubProject}.git"
-    developerConnection "scm:git@github.com:${project.gitHubProject}.git"
-  }
-  developers {
-      developer {
-        id "robfletcher"
-        name "Rob Fletcher"
-        url "http://freeside.co/"
-        roles {
-          role "Developer"
-        }
-    }
-  }
-}
-
-publishing {
-  publications {
-    mavenCustom(MavenPublication) {
-      from components.java
-      artifact sourceJar
-      artifact javadocJar
-
-      pom.withXml {
-        asNode().dependencies.dependency.each { dep ->
-          if (dep.scope.text() in ["runtime", "test"]) {
-            dep.remove(dep.scope)
-          }
-        }
-        asNode().children().last() + pomConfig
-      }
+    websiteUrl = "https://github.com/robfletcher/discordian-calendar"
+    issueTrackerUrl = "https://github.com/robfletcher/discordian-calendar/issues"
+    vcsUrl = "https://github.com/robfletcher/discordian-calendar.git"
+    licenses = ["WTFPL"]
+    labels = ["date", "time", "datetime"]
+    publicDownloadNumbers = true
+    version {
+      name = project.version
+      vcsTag = project.version
     }
   }
 }

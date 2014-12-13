@@ -3,7 +3,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath "org.jfrog.buildinfo:build-info-extractor-gradle:2.2.3"
+    classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:0.5"
   }
 }
 
@@ -14,8 +14,8 @@ repositories {
 ext {
   isSnapshot = version.endsWith("-SNAPSHOT")
   versions = [
-    groovy: "2.3.8",
-    spock : "0.7-groovy-2.0"
+      groovy: "2.3.8",
+      spock : "0.7-groovy-2.0"
   ]
 }
 
